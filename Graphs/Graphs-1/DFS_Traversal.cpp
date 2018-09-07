@@ -7,7 +7,7 @@ using namespace std;
 void print(int **edges, int n, int starting_vertex, int *visited)
 {
 
-	cout << starting_vertex << endl;
+	cout << starting_vertex << " ";
 	visited[starting_vertex] = 1;
 	
 	for(int i =0;i<n;i++)
@@ -28,8 +28,6 @@ void print(int **edges, int n, int starting_vertex, int *visited)
 	}
 
 	return;
-
-
 }
 
 int main()
@@ -60,7 +58,11 @@ int main()
 	for(int i=0;i<n;i++)
 		visited[i] = 0;
 
-	print(edges,n,0,visited);
+	for(int i=0;i<n;i++)
+	{
+		if(visited[i] == 0) //for non-connected graphs
+			print(edges,n,i,visited);
+	}
 
 	return 0 ; 
 }
