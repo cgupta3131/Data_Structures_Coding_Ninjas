@@ -79,12 +79,6 @@ int main()
 
     //printGraph(adj,V);
 
-    bool *visited = new bool[V];
-
-    for(int i=0;i<V;i++)
-    	visited[i] = false;
-
-
     for(int i=0;i<10;i++)
     {
     	char first, second;
