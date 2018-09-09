@@ -26,14 +26,12 @@ void printGraph(vector<int> adj[], int V)
 	}
 }
 
-
-
 int main()
 
 {
 
 	int V = 5; //no. of vertices
-	vector<int> adj[V];
+	vector<int> *adj = new vector<int>[V];
     addEdge(adj, 0, 1);
     addEdge(adj, 0, 4);
     addEdge(adj, 1, 2);
