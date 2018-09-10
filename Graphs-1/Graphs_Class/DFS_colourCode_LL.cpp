@@ -90,7 +90,7 @@ void DFS_Traversal(LinkedList *helper_array, int *colour, int *starting_time,
 	{
 		if( colour[ (temp->data) - 'a' ]  == 0)
 		{
-			predeccesor[source_node - 'a'] = source_node;
+			predeccesor[(temp->data) - 'a'] = source_node;
 			DFS_Traversal(helper_array,colour,starting_time,finishing_time, 
 			predeccesor, V, temp->data );
 		}
@@ -128,6 +128,15 @@ void DFS(LinkedList* helper_array, int V)
 
 	DFS_Traversal(helper_array,colour,starting_time,finishing_time,
 		predeccesor,V,'a');
+
+	cout << endl << endl;
+	for(int i=0;i<V;i++)
+	{
+		//cout << char(i + 'a') << " : " << predeccesor[i] << endl;
+		cout << char(i + 'a') << " : " << starting_time[i] << endl;
+		cout << char(i + 'a') << " : " << finishing_time[i] << endl << endl;
+	}
+
 }
 
 

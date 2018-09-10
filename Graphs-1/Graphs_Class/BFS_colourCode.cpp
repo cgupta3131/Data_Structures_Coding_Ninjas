@@ -89,9 +89,7 @@ int main()
 
 
     BFS_traversal(adj, V, 'a');
-
-    return 0;	
-
+    return 0;
 
 
 	return 0 ; 

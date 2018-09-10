@@ -68,6 +68,7 @@ void DFS_Stack(LinkedList *helper_array, int V, bool *visited, char source, vect
 		if(visited[top-'q'] == false)
 		{
 			output->push_back(top);
+			cout << top << " ";
 			visited[top - 'q'] = true;
 		}
 
@@ -79,7 +80,6 @@ void DFS_Stack(LinkedList *helper_array, int V, bool *visited, char source, vect
 				s.push(temp->data);
 			temp = temp->next;
 		}
-
 	}
 }
 
@@ -139,6 +139,7 @@ int main()
 		if(visited[i] == false)
 			DFS_Stack(helper_array,V,visited, i+'q', &output);
 	}
+	cout << endl << endl;
 
 	cout << output.size() << endl;
 
@@ -173,6 +174,8 @@ int main()
 		}
 
 	}
+
+	cout << endl << endl;
 
 
 	return 0 ; 
