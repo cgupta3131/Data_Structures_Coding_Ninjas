@@ -18,7 +18,7 @@ void printGraph(vector<char> adj[], int V)
 
 	for(int i=0;i<V;i++)
 	{
-		cout << "Adjaceny List for vertex " << i << " is " << endl;
+		cout << "Adjaceny List for vertex " << char(i+'a') << " is " << endl;
 		cout << "Head";
 
 		for(int j=0;j<adj[i].size();j++)

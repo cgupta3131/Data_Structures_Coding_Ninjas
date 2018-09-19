@@ -70,16 +70,9 @@ void PreOrder(ThreadNode *root)
 			root = root->right;
 
 		if(root != NULL)
-			root = root->right;
-			
-		
+			root = root->right;	
 	}
-
-
-
 }
-
-
 
 
 ThreadNode *findNode(int value, ThreadNode* root)

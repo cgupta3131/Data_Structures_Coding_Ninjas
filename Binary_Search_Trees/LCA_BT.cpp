@@ -150,7 +150,9 @@ int lcaBinaryTree(BinaryTreeNode <int>* root , int val1, int val2)
 		return lcaBinaryTree(root->left,val1,val2);		
 
 	if(  isPresent(root->right,val1) == true && isPresent(root->right,val2) == true)
-		return lcaBinaryTree(root->right,val1,val2);		
+		return lcaBinaryTree(root->right,val1,val2);
+
+	return 0;		
 	
 
 }

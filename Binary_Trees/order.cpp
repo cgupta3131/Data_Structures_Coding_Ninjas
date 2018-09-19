@@ -1,9 +1,9 @@
+#include<iostream>
 #include<cstring>
 #include <vector>
 #include <stack>
 #include <string.h>
 #include <queue>
-#include<iostream>
 using namespace std;
 
 template <typename T>
@@ -30,7 +30,6 @@ class BinaryTreeNode{
 
 	}
 };
-
 
 BinaryTreeNode<int>* takeInputLevelWise()
 {
@@ -82,75 +81,81 @@ BinaryTreeNode<int>* takeInputLevelWise()
 	return root;
 }
 
-
-
-bool isPresent(	BinaryTreeNode<int>* root, int x)
+void printTreeLevelWise(BinaryTreeNode<int> *root)
 {
 	if(root == NULL)
-		return false;
+		return;
 
-	if(root->data == x)
-		return true;
+	queue< BinaryTreeNode<int>* > pendingNodes;
+	pendingNodes.push(root);
 
-	if(root->data > x)
-		return isPresent(root->left,x);
-	else
-		return isPresent(root->right,x);
+	while(pendingNodes.size() != 0)
+	{
+
+		BinaryTreeNode<int> *front = pendingNodes.front();
+		pendingNodes.pop();
+
+		cout << front->data << ":";
+
+
+		if(front->left != NULL)
+		{
+			cout << "L:" << front->left->data << ",";
+			pendingNodes.push(front->left);
+		}
+
+		else
+			cout << "L:" << "-1" << ",";
+
+		if(front->right != NULL)
+		{
+			cout << "R:" << front->right->data;
+			pendingNodes.push(front->right);
+		}
+
+		else
+			cout << "R:" << "-1" ;
+
+		cout << endl;
+
+	}
 
 }
 
-
-int lcaInBST(BinaryTreeNode<int>* root , int val1 , int val2)  // the first node with value between val1 and val2 is my 
-															   // LCA for BST!!!!!
+void inOrder(BinaryTreeNode<int> *root)
 {
-	bool first = isPresent(root,val1);
-	bool second = isPresent(root,val2);
+	if(root == NULL)
+		return;
 
-	if(first == false && second == true)
-		return val2;
+	inOrder(root->left);
+	cout << root->data << " ";
+	inOrder(root->right);
+}
 
-	else if(first == true && second == false)
-		return val1;
+void preOrder(BinaryTreeNode<int> *root)
+{
+	if(root == NULL)
+		return;
 
-	else if(first == false && second == false)
-		return -1;
-
-	if(root->data == val1 || root->data == val2)
-		return root->data;
-
-
-
-	int maxi = max(val1,val2);
-	int mini = min(val1,val2);
-
-
-	if(root->data > mini && root->data < maxi )
-		return root->data;
-
-	if(root->data > maxi)
-		return lcaInBST(root->left,val1,val2);
-
-	if(root->data < mini)
-		return lcaInBST(root->right,val1,val2);
-
-	return 0;
+	cout << root->data << " ";
+	preOrder(root->left);
+	preOrder(root->right);
 }
 
 
+// 1 2 3 4 -1 6 7 -1 5 8 9 -1 -1 -1 -1 -1 -1 -1 -1
 int main()
 {
-
 	BinaryTreeNode<int> *root = takeInputLevelWise();
 	cout << endl << endl;
+	cout << "Inorder Traversal is : ";
+	inOrder(root);
+	cout << endl<<endl;
 
-	int val1, val2;
-	cout << "Enter value 1 : ";
-	cin >> val1;
+	cout << "PreOrder Traversal is : ";
+	preOrder(root);
+	cout << endl;
 
-	cout << "Enter value 2 : ";
-	cin >> val2;
-
-	cout << endl << endl;
-	cout << lcaInBST(root,val1,val2) << endl;
+	delete(root);
 
 }
