@@ -235,8 +235,5 @@ int main()
 	print(head);
 	cout << endl;
 
-	Node *head2 = remove_Duplicate(head);
-	print(head2);
-
 
 }
