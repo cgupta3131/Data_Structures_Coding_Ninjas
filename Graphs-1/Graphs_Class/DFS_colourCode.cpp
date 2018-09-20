@@ -9,7 +9,7 @@ using namespace std;
 void addEdge(vector<char> adj[], char u, char v)
 {
 	adj[u-'a'].push_back(v);
-	adj[v-'a'].push_back(u);
+	//adj[v-'a'].push_back(u);
 }
 
 void printGraph(vector<char> adj[], int V)
@@ -28,6 +28,7 @@ void printGraph(vector<char> adj[], int V)
 
 int tt = 0;
 
+stack<char> topological_sort;
 
 void DFS_Traversal(vector<char> *adj, int *colour, int *starting_time,
 				   int *finishing_time, char *predeccesor, int V, char source_node)
@@ -50,6 +51,7 @@ void DFS_Traversal(vector<char> *adj, int *colour, int *starting_time,
 
 	colour[source_node - 'a'] = 2;
 	tt++;
+	topological_sort.push(source_node); //for topological sort!
 	finishing_time[source_node - 'a' ] = tt;
 }
 
@@ -80,24 +82,25 @@ int main()
 
 	int V = 5; //no. of vertices
 	vector<char> *adj = new vector<char>[V];
-    //addEdge(adj, 'a', 'b');
     addEdge(adj, 'a', 'e');
-   	//addEdge(adj, 'b', 'c');
-    addEdge(adj, 'b', 'd');
-    addEdge(adj, 'b', 'e');
-    addEdge(adj, 'c', 'd');
-    addEdge(adj, 'd', 'e');
+    addEdge(adj, 'e', 'b');
+    addEdge(adj, 'e', 'd');
+    addEdge(adj, 'a', 'c');
+    
     printGraph(adj, V);
 
 
     DFS(adj, V);
     cout << endl << endl;
 
-    return 0;	
+    for(int i=0;i<5;i++)
+    {
+    	cout << topological_sort.top() << " ";
+    	topological_sort.pop();
+    }	
 
 
-
-	return 0 ; 
+    return 0;
 
 }
 
