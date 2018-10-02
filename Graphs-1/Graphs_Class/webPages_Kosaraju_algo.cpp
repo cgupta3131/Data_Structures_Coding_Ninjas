@@ -78,8 +78,6 @@ stack<int> s;
 void DFS_Traversal(LinkedList *helper_array, int V, bool *visited, int source)
 {
 	visited[source] = true;
-	
-	
 	LinkedList *temp = helper_array[source].head;
 
 	while(temp != NULL)
