@@ -147,7 +147,7 @@ public:
 
 		while(head != NULL)
 		{
-			if(head->key = key)
+			if(head->key == key)
 			{
 				head->value = value;
 				return;

@@ -10,7 +10,7 @@ char* uniqueChar(char *str)
 {
 	unordered_map<char, int> ourmap;
 
-	int length = strlen(str);
+	int length = str.length();
 	char *final = new char [length];
 
 	for(int i=0;i<length;i++)

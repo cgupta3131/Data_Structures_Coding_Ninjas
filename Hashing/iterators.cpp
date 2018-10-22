@@ -22,7 +22,8 @@ int main()
 
 	it = ourmap.begin();
 
-	for( ; it!=ourmap.end() ; it++)
+	for( ; it!=ourmap.end() ; it++) //ourmap.end() means that even the last element has been covered! 
+									//It doesn't mean that ourmap.end() is a last element! it is one step beyond the last element!
 		cout << "Key : " << it->first << " Value : " << it->second << endl;
 
 	

@@ -62,9 +62,9 @@ int main()
 	s1.display();
 	s2.display();
 
-	/*name[3] = 'e';
+	name[3] = 'e';
 	Student s2(25,name);
 	s2.display();
-	s1.display();*/
+	s1.display();
 
 }
