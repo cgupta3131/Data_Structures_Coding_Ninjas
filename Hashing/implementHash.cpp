@@ -16,7 +16,7 @@ public:
 	MapNode(string key, V value)
 	{
 		this->key = key;
-		this-value = value;
+		this->value = value;
 		next = NULL;
 
 	}
@@ -31,10 +31,11 @@ class ourmap{
 	int count;
 	int numBuckets;
 
-	ourmap()
+public:
+	ourmap(int n)
 	{
 		count = 0;
-		numBuckets = 5;
+		numBuckets = n;
 		buckets = new MapNode<V>*[numBuckets]; //initializing the array of head of LL
 
 		for(int i=0;i<numBuckets;i++)
@@ -210,14 +211,23 @@ public:
 	}
 
 
-
-
-
 };
 
 
 int main()
 {
+	int n = 20;
+	ourmap<int> *mymap = new ourmap<int>(n);
+	mymap->insert("abc1",11);
+	mymap->insert("abc2",12);
+	mymap->insert("abc3",13);
+	mymap->insert("abc4",14);
+	mymap->insert("abc5",15);
+	mymap->insert("abc6",16);
+	cout << mymap->size() << endl;
+	
+	mymap->remove("abc6");
+	cout << mymap->size() << endl;
 
-	cout << "helloworld" << endl;
+
 }
