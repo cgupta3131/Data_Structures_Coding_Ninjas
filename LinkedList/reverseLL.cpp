@@ -129,23 +129,110 @@ void reverseRecursively(Node *head)
 	cout << top->data << " ";
 }
 
+Node *reverseLinkedList(Node *head) //Without Extra Space and in O(n) time
+{
+
+	Node *current = head;
+    Node *Next = NULL;
+    Node *prev = NULL;
+
+    //Reversing the Linked List
+    while(current != NULL)
+    {
+    	Next = current->next;
+    	current->next = prev;
+    	prev = current;
+    	current = Next;
+    }
+
+    return prev;
+}
+
+Node *ModifyFirstHalfContents(Node *A)
+{
+	int count = 0;
+    Node* temp = A;
+
+    while(temp != NULL)
+    {
+    	count++;
+    	temp = temp->next;
+    }
+
+    if(count == 0 || count == 1)
+    	return A;
+
+    if(count == 2)
+    {
+    	temp = A->next;
+    	A->data = (temp->data) - (A->data);
+    	return A;
+    }
+
+    temp = A;
+    Node *prev = NULL;
+    for(int i=0;i<count/2;i++)
+    {
+    	prev = temp;
+    	temp = temp->next;
+    }
+
+    Node *temp_last = prev;
+    prev->next = NULL;
+    //Now A points to first half and temp points to second Half
+    //Now I need to reverse the second half LL
+
+    Node *current = temp;
+    Node *Next = NULL;
+    prev = NULL;
+
+    //Reversing the Linked List
+    while(current != NULL)
+    {
+    	Next = current->next;
+    	current->next = prev;
+    	prev = current;
+    	current = Next;
+    }
+
+    Node *temp1 = A;
+    Node *temp2 = prev;
+
+    for(int i=0;i<count/2;i++)
+    {
+    	temp1->data = (temp2->data) - (temp1->data);
+    	temp1 = temp1->next;
+    	temp2 = temp2->next;
+    }
+
+    current = prev;
+    Next = NULL;
+    prev = NULL;
+
+    //Reversing Back the list!
+    while(current != NULL)
+    {
+    	Next = current->next;
+    	current->next = prev;
+    	prev = current;
+    	current = Next;
+    }
+    //Now prev is the starting of the second half list
+
+    temp_last->next = prev;
+    return A;
+}
+
 
 
 int main()
 {
 
 	Node *head = takeInput();
+	int length_LL = length(head); 
+		
+	head = ModifyFirstHalfContents(head);
 	print(head);
-
-	int length_LL = length(head); //returns the length of the Linked List formed!
-
-	head = Reverse_Iteratively(&head,length_LL);
-	cout << "The Reversed List is : ";
-	print(head);	
-
-	reverseRecursively(head);
-
-
-
+	cout << endl << endl;
 
 }
