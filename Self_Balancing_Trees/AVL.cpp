@@ -252,6 +252,81 @@ public:
 
 	}
 
+
+	void DeleteNode(int value)
+	{
+		Node *targetNode = BSTDelete(value);
+		Rebalance(targetNode);
+	}
+
+	Node* BSTDelete(int value)
+	{
+		Node *myNode = head;
+
+		while(myNode != NULL)
+		{
+			if(myNode->data == value)
+				break;
+
+			if(myNode->data > value)
+				myNode = myNode->leftChild;
+			else
+				myNode = myNode->rightChild;
+		}
+
+		if(myNode->leftChild == NULL && myNode->rightChild == NULL)
+		{
+			Node *Parent = myNode->parent;
+			if(Parent->leftChild == myNode)
+				Parent->leftChild = NULL;
+			else
+				Parent->rightChild = NULL;
+
+			delete myNode;
+
+			return Parent;
+		}
+
+		else if(myNode->leftChild == NULL && myNode->rightChild != NULL)
+		{
+			Node *temp = myNode->rightChild;
+
+			while(temp->leftChild != NULL)
+				temp = temp->leftChild;
+
+			myNode->data = temp->data;
+			Node *Parent = temp->parent;
+			if(Parent->leftChild == temp)
+				Parent->leftChild = NULL;
+			else
+				Parent->rightChild = NULL;
+
+			delete temp;
+
+			return Parent;
+		}
+
+		else
+		{
+			Node *temp = myNode->leftChild;
+
+			while(temp->rightChild != NULL)
+				temp = temp->rightChild;
+
+			myNode->data = temp->data;
+			Node *Parent = temp->parent;
+			if(Parent->leftChild == temp)
+				Parent->leftChild = NULL;
+			else
+				Parent->rightChild = NULL;
+
+			delete temp;
+
+			return Parent;
+		}
+
+	}
+
 };
 
 
@@ -264,21 +339,26 @@ int main()
 {
 	AVLTree *tree = new AVLTree;
 
-	while(1)
-	{
-		cout << "Give an Input : ";
-		int x;
-		cin >> x;
-		if(x == -1)
-			break;
 
-		tree->InsertData(x);
-		cout << endl;
-		cout << "Data is : " << endl;
-		tree->Print();
-		cout << endl;
+	tree->InsertData(5);
+	tree->InsertData(8);
+	tree->InsertData(3);
+	tree->InsertData(11);
+	tree->InsertData(7);
+	tree->InsertData(4);
+	tree->InsertData(2);
+	tree->InsertData(12);
+	tree->InsertData(10);
+	tree->InsertData(6);
+	tree->InsertData(1);
+	tree->InsertData(9);
+	tree->DeleteNode(4);
 
-	}
+	cout << endl;
+	cout << "Data is : " << endl;
+	tree->Print();
+	cout << endl;
+
 
 
 	return 0 ; 
