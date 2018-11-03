@@ -53,38 +53,8 @@ public:
 		}
 
 		Node *AddedNode = BSTInsert(data); 
-
-		UpdateHeights(AddedNode);
-
-		if(AddedNode->data == 12 || AddedNode->data == 5)
-		{
-			Node *temp = AddedNode;
-			cout << endl;
-		
-			while(temp != NULL)
-			{
-				cout << "Height of " << temp->data << " is " << temp->height << endl;
-				temp = temp->parent;
-			}			
-
-
-		}
+		//UpdateHeights(AddedNode);
 		Rebalance(AddedNode);
-
-		if(AddedNode->data == 5)
-		{
-			Node *temp = AddedNode;
-			cout << endl;
-		
-			while(temp != NULL)
-			{
-				cout << "After Height of " << temp->data << " is " << temp->height << endl;
-				temp = temp->parent;
-			}			
-
-
-		}
-		//Inserting Data Normally as in BST and Updating Heights
 	}
 
 	Node* BSTInsert(int data)
