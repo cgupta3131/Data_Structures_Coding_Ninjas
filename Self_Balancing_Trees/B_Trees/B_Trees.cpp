@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 
+//Agressive Insertion(Up-Bottom)
+//If it sees root full then it will just split and move further
 using namespace std;
 
 class Node{
@@ -211,7 +213,7 @@ public:
 int main()
 {	
 	BTree t(3);
-	t.InsertNode(10);
+	t.InsertNode(10);	
 	t.InsertNode(20);
 	t.InsertNode(30);
 	t.InsertNode(40);
@@ -219,11 +221,11 @@ int main()
 	t.InsertNode(60);
 	t.InsertNode(70);
 	t.InsertNode(80);
-	t.InsertNode(90);
+	t.InsertNode(25);
 
-	cout << "Traversal of Constructed Tree is : ";
-	t.TreeTraversal();
-	cout << endl;
+	cout<< t.root->keys[0] << endl;
+	cout<< t.root->keys[1] << endl;
+
 
 
 	return 0 ; 
