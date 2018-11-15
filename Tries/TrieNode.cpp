@@ -136,14 +136,8 @@ private:
 			{	
 				delete child;
 				root->children[index] = NULL; //i.e we have removed the child!
-			}		
-
-			
+			}					
 		}
-
-
-
-
 
 	}
 
