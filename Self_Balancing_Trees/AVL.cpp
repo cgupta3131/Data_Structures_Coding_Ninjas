@@ -63,9 +63,6 @@ public:
 		Node *temp = head;
 		Node *newNode = new Node(data);
 
-
-
-
 		while(1)
 		{
 			if(temp->leftChild == NULL && temp->rightChild == NULL)
@@ -110,6 +107,7 @@ public:
 
 		while(temp != NULL)
 		{
+			//I am updating my heights here only! So no need to call UpdateHeights function
 			temp->height = max(getHeight(temp->leftChild),getHeight(temp->rightChild)) + 1;
 			int balanceValue = getHeight(temp->leftChild) - getHeight(temp->rightChild);
 			if(balanceValue == 2)
@@ -128,13 +126,10 @@ public:
 			{
 
 				if( (getHeight(temp->rightChild->rightChild) - getHeight(temp->rightChild->leftChild)) >= 0 )
-				{
-					cout << "Rotate Left " << temp->data << endl;
 					temp = RotateLeft(temp);
-				}
+		
 				else
 				{	
-					cout << "Rotate Rotate then Left " << endl;
 					temp->rightChild = RotateRight(temp->rightChild);
 					temp = RotateLeft(temp);
 				}
@@ -181,6 +176,7 @@ public:
 		if(Parent_Y == NULL) //Means that y was head, but Now head has to be x!
 			head = x;
 
+		//Note that first height of y gets updated and then height og x gets updated!
 		y->height = max(getHeight(y->leftChild),getHeight(y->rightChild))+1;
 		x->height = max(getHeight(x->leftChild),getHeight(x->rightChild))+1;
 
@@ -274,8 +270,10 @@ public:
 				myNode = myNode->rightChild;
 		}
 
-		if(myNode->leftChild == NULL && myNode->rightChild == NULL)
+		if(myNode->leftChild == NULL && myNode->rightChild == NULL) //leaf Node
 		{
+
+
 			Node *Parent = myNode->parent;
 			if(Parent->leftChild == myNode)
 				Parent->leftChild = NULL;
@@ -289,6 +287,7 @@ public:
 
 		else if(myNode->leftChild == NULL && myNode->rightChild != NULL)
 		{
+
 			Node *temp = myNode->rightChild;
 
 			while(temp->leftChild != NULL)
@@ -296,10 +295,14 @@ public:
 
 			myNode->data = temp->data;
 			Node *Parent = temp->parent;
-			if(Parent->leftChild == temp)
-				Parent->leftChild = NULL;
+			if(Parent->rightChild == temp)
+			{
+				Parent->rightChild = temp->rightChild;
+				if(temp->rightChild != NULL)
+					temp->rightChild->parent = Parent;
+			}
 			else
-				Parent->rightChild = NULL;
+				Parent->leftChild = NULL;
 
 			delete temp;
 
@@ -316,7 +319,11 @@ public:
 			myNode->data = temp->data;
 			Node *Parent = temp->parent;
 			if(Parent->leftChild == temp)
-				Parent->leftChild = NULL;
+			{
+				Parent->leftChild = temp->leftChild;
+				if(temp->leftChild != NULL)
+					temp->leftChild->parent = Parent;
+			}
 			else
 				Parent->rightChild = NULL;
 
@@ -340,19 +347,25 @@ int main()
 	AVLTree *tree = new AVLTree;
 
 
-	tree->InsertData(5);
-	tree->InsertData(8);
-	tree->InsertData(3);
-	tree->InsertData(11);
-	tree->InsertData(7);
-	tree->InsertData(4);
-	tree->InsertData(2);
-	tree->InsertData(12);
-	tree->InsertData(10);
-	tree->InsertData(6);
-	tree->InsertData(1);
-	tree->InsertData(9);
-	tree->DeleteNode(4);
+	tree->InsertData(50);
+	tree->InsertData(20);
+	tree->InsertData(17);
+	tree->InsertData(40);
+	tree->InsertData(30);
+	tree->InsertData(100);
+	tree->InsertData(900);
+	tree->InsertData(700);
+	tree->InsertData(200);
+	tree->InsertData(400);
+	//tree->InsertData(1);
+	//tree->InsertData(9);
+	tree->DeleteNode(200);
+	tree->DeleteNode(400);
+	tree->DeleteNode(50);
+	tree->DeleteNode(100);
+	tree->DeleteNode(700);
+	tree->DeleteNode(900);
+
 
 	cout << endl;
 	cout << "Data is : " << endl;
