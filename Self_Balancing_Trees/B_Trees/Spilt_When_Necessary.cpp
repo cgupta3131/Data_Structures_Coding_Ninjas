@@ -55,55 +55,6 @@ public:
 		n++;
 	}
 
-
-	/*  void Insert(int k, Node *TargetNode, Node **root)
-	{
-
-		Node *node = TargetNode;
-		while(1)
-		{
-			if( node->n != (2*t-1) ) //If the Node is not full!
-			{
-				node->InsertLeafNode(k);
-				return;
-			}
-
-			Node *z = new Node(t,isLeaf,parent);
-			z->n = t-1;
-
-			for(int j=0;j<t-1;j++)
-				z->keys[j] = node->keys[j+t];
-
-			if(node->isLeaf == false)
-			{
-				for(int j=0;j<t;j++)
-					z->child[j] = node->child[j+t];
-			}
-
-			node->n = t-1;
-			int k = node->keys[t-1];
-
-			if(node->parent == NULL)
-			{
-				Node *s = new Node(t,false,NULL);
-				s->child[0] = node;
-				s->child[1] = z;
-
-				node->parent = s;
-				z->parent = s;
-
-				s->keys[0] = k;
-				s->n += 1;
-
-				*root = s;
-
-				return;
-			}
-
-			else 
-				node = node->parent;
-		}
-	}  */
 };
 
 
@@ -143,7 +94,7 @@ public:
 
 				if( node->n != (2*t-1) ) //If the Node is not full!
 				{	
-					if(node1 != NULL)
+					/*  if(node1 != NULL)
 					{
 						int i;
 						for(i=0;i<=node->n;i++)
@@ -165,8 +116,8 @@ public:
 						node->n += 1;
 					}
 
-					else
-						node->InsertLeafNode(k);
+					else  */
+					node->InsertLeafNode(k);
 					return;
 				}
 
@@ -179,16 +130,57 @@ public:
 				for(int j=0;j<t-1;j++)
 					node2->keys[j] = node->keys[j+t];
 
-				if(node->isLeaf == false)
+			/*  	if(node->isLeaf == false)
 					for(int j=0;j<t;j++)
-						node2->child[j] = node->child[j+t];
+						node2->child[j] = node->child[j+t];  */
 
 				int temp = node->keys[t-1];
 				if(k > temp)
+				{
 					node2->InsertLeafNode(k);
+					if(node2->isLeaf == false)
+					{
+						for(int j=0;j<=t;j++)
+							node2->child[j] = node->child[j+t];
+						for(int j=0;j<t;j++)
+							node1->child[j] = node->child[j];
+					}
+				}
 				else
+				{
 					node1->InsertLeafNode(k);
+					if(node1->isLeaf == false)
+					{
+						for(int j=0;j<t;j++)
+							node2->child[j] = node->child[j+t+1];
+						for(int j=0;j<=t;j++)
+							node1->child[j] = node->child[j];
+					}
+				}
 				
+				int i;
+				Node *myParent = node->parent;
+
+				if(myParent != NULL)
+				{	
+					for(i=0;i<=myParent->n;i++)
+					{
+						if(myParent->child[i]->keys[0] == node1->keys[0])
+							break;
+					}
+
+					for (int j = myParent->n; j >= i+1; j--)
+						myParent->child[j+1] = myParent->child[j];
+
+					myParent->child[i] = node1;
+					myParent->child[i+1] = node2;	
+
+					/*  for(int j=myParent->n;j>i;j--)
+						myParent->keys[j+1] = myParent->keys[j];
+
+					myParent->keys[i] = k;
+					myParent->n += 1;  */
+				}
 
 				k=temp;
 
@@ -203,8 +195,8 @@ public:
 
 					s->keys[0] = temp;
 					s->n += 1;
-
 					root = s;
+
 					return;
 				}
 
@@ -249,7 +241,10 @@ int main()
 	cout << t.root->child[1]->child[1]->keys[1] << endl;
 	cout << t.root->child[1]->child[1]->keys[2] << endl << endl;
 
-
+	cout << t.root->child[1]->child[2]->n << endl;
+	cout << t.root->child[1]->child[2]->keys[0] << endl;
+	cout << t.root->child[1]->child[2]->keys[1] << endl;
+	cout << t.root->child[1]->child[2]->keys[2] << endl << endl;
 
 	
 	
